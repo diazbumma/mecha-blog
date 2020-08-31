@@ -1,0 +1,10 @@
+<h1>You're at the home page</h1>
+
+<% blogs.forEach(item => { %>
+    <div>
+        <h2><%= item.title %></h2>
+        <img src="<%= item.image %>">
+        <span><%= item.created %></span>
+        <p><%= item.body %></p>
+    </div>
+<% }); %>
