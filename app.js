@@ -1,15 +1,18 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
 const app = express()
 const PORT = 3000
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(methodOverride('_method'))
 mongoose.connect('mongodb://localhost/mecha_blog', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }).then(() => console.log('Connected to mecha_blog DB!')).catch(error => console.log(error.message))
 
 let blogSchema = new mongoose.Schema({
@@ -69,6 +72,26 @@ app.get('/blogs/:id', function(req, res) {
             res.redirect('/blogs')
         } else {
             res.render('show', {blog: data})
+        }
+    })
+})
+
+app.get('/blogs/:id/edit', function(req, res) {
+    Blog.findById(req.params.id, function(err, data) {
+        if (err) {
+            res.redirect('/blogs')
+        } else {
+            res.render('edit', {blog: data})
+        }
+    })
+})
+
+app.put('/blogs/:id', function(req, res) {
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, data) {
+        if (err) {
+            res.redirect('/blogs')
+        } else {
+            res.redirect('/blogs/' + req.params.id)
         }
     })
 })
