@@ -1,0 +1,10 @@
+<%- include('partials/header') %>
+
+<div class="ui container text segment">
+    <h2 class="ui header"><%= blog.title %></h2>
+    <h4><%= blog.created.toDateString() %></h4>
+    <img class="ui centered rounded image" src="<%= blog.image %>">
+    <p><%= blog.body %></p>
+</div>
+
+<%- include('partials/footer') %>
