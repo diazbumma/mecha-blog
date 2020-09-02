@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
+const sanitizer = require('express-sanitizer')
 const app = express()
 const PORT = 3000
 
@@ -9,6 +10,7 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
+app.use(sanitizer())
 mongoose.connect('mongodb://localhost/mecha_blog', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -56,6 +58,7 @@ app.get('/blogs/new', function(req, res) {
 })
 
 app.post('/blogs', function(req, res) {
+    req.body.blog.body = req.sanitize(req.body.blog.body)
     Blog.create(req.body.blog, function(err, data) {
         if (err) {
             console.log(err)
@@ -87,6 +90,7 @@ app.get('/blogs/:id/edit', function(req, res) {
 })
 
 app.put('/blogs/:id', function(req, res) {
+    req.body.blog.body = req.sanitize(req.body.blog.body)
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, data) {
         if (err) {
             res.redirect('/blogs')

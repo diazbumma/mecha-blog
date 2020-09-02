@@ -7,7 +7,7 @@
         <h2><%= item.title %></h2>
         <img src="<%= item.image %>">
         <span><%= item.created.toDateString() %></span>
-        <p><%= item.body.substring(0, 100) + '..' %></p>
+        <p><%- item.body.substring(0, 100) + '..' %></p>
         <a href="/blogs/<%= item._id %>">Read more</a>
     </div>
 <% }); %>

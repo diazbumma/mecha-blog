@@ -4,7 +4,7 @@
     <h2 class="ui header"><%= blog.title %></h2>
     <h4><%= blog.created.toDateString() %></h4>
     <img class="ui centered rounded image" src="<%= blog.image %>">
-    <p><%= blog.body %></p>
+    <p><%- blog.body %></p>
     <div>
         <a class="ui grey basic button" href="/blogs/<%= blog._id %>/edit">Edit</a>
         <form class="inline" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
