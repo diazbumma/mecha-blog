@@ -5,6 +5,7 @@
     <h4><%= blog.created.toDateString() %></h4>
     <img class="ui centered rounded image" src="<%= blog.image %>">
     <p><%= blog.body %></p>
+    <a href="/blogs/<%= blog._id %>/edit">Edit post</a>
 </div>
 
 <%- include('partials/footer') %>

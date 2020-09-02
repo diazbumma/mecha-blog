@@ -9,7 +9,6 @@
         <span><%= item.created.toDateString() %></span>
         <p><%= item.body.substring(0, 100) + '..' %></p>
         <a href="/blogs/<%= item._id %>">Read more</a>
-        <a href="/blogs/<%= item._id %>/edit">Edit post</a>
     </div>
 <% }); %>
 
