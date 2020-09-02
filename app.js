@@ -96,6 +96,17 @@ app.put('/blogs/:id', function(req, res) {
     })
 })
 
+app.delete('/blogs/:id' , function(req, res) {
+    Blog.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.redirect('/blogs')
+        } else {
+            console.log(req.params.id + ' has been deleted')
+            res.redirect('/blogs')
+        }
+    })
+})
+
 app.get('*', function(req, res) {
     res.send('Ups, i think you lost buddy')
 })
