@@ -1,15 +1,28 @@
 <%- include('partials/header') %>
 
-<h1>You're at the home page</h1>
-
-<% blogs.forEach(item => { %>
-    <div>
-        <h2><%= item.title %></h2>
-        <img src="<%= item.image %>">
-        <span><%= item.created.toDateString() %></span>
-        <p><%- item.body.substring(0, 100) + '..' %></p>
-        <a href="/blogs/<%= item._id %>">Read more</a>
+<div class="ui container text segment">
+    <h1>Gundam Blog Posts</h1>
+    <div class="ui divided items">
+        <% blogs.forEach(item => { %>
+            <div class="ui item">
+                <div class="image">
+                    <img src="<%= item.image %>">
+                </div>
+                <div class="content">
+                    <h2 class="header"><%= item.title %></h2>
+                    <div class="meta">
+                        <span><%= item.created.toDateString() %></span>
+                    </div>
+                    <div class="description">
+                        <p><%- item.body.substring(0, 100) + '..' %></p>
+                    </div>
+                    <a class="ui right floated button" href="/blogs/<%= item._id %>">
+                        Read more
+                    </a>
+                </div>
+            </div>
+        <% }); %>
     </div>
-<% }); %>
+</div>
 
 <%- include('partials/footer') %>
