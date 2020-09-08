@@ -17,14 +17,7 @@ mongoose.connect('mongodb://localhost/mecha_blog', {
     useFindAndModify: false
 }).then(() => console.log('Connected to mecha_blog DB!')).catch(error => console.log(error.message))
 
-let blogSchema = new mongoose.Schema({
-    title: String,
-    image: String,
-    body: String,
-    created: {type: Date, default: Date.now}
-})
-
-let Blog = mongoose.model('Blog', blogSchema)
+const Blog = require('./models/blog')
 
 app.get('/', function(req, res) {
     res.redirect('/blogs')
